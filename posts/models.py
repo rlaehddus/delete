@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.contrib.auth.models import User
 # Create your models here.
 
 class Post(models.Model):
@@ -9,3 +9,11 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add = True)
     updated_at = models.DateTimeField(auto_now = True)
     image = models.ImageField(upload_to='images/', null=True)
+    user = models.ForeignKey(User, on_delete = models.CASCADE, null=True)
+
+class Comment(models.Model):
+    content = models.TextField()
+    user = models. ForeignKey(User, on_delete = models.CASCADE)
+    created_at = models.DateTimeField(auto_now_add=True) 
+    updated_at = models.DateTimeField(auto_now = True)
+    Post = models. ForeignKey(Post, on_delete = models.CASCADE, related_name='comments')
